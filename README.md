@@ -110,6 +110,8 @@ The dashboard shows measured against predicted rates per well and phase, the acc
 each meter, and a what-if panel: move the choke or the pressure drop and see the meter's
 response together with the fitted choke equation of the well.
 
+![Dashboard: accuracy per meter and out-of-sample predictions](docs/dashboard.png)
+
 ## Project layout
 
 ```
