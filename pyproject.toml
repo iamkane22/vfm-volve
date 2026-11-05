@@ -1,0 +1,51 @@
+[project]
+name = "vfm-volve"
+version = "0.1.0"
+description = "Virtual flow metering on the Equinor Volve field: physics-informed and data-driven estimates of daily oil, gas and water rates per well."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Kanan Manafli" }]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "pyarrow>=15",
+    "openpyxl>=3.1",
+    "scikit-learn>=1.4",
+    "joblib>=1.3",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+app = ["streamlit>=1.35", "plotly>=5.20"]
+report = ["matplotlib>=3.8"]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.5", "mypy>=1.10", "pandas-stubs>=2.2"]
+
+[project.scripts]
+vfm = "vfm.cli:app"
+
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vfm"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "app"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "PL", "NPY", "PD"]
+ignore = ["PLR0913", "PLR2004", "PLC0415"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+files = ["src/vfm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
